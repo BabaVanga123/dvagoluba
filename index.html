@@ -1,0 +1,693 @@
+<!DOCTYPE html>
+<html lang="hr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Konoba Dva Goluba - Duboka</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&display=swap">
+  <link href="https://cdn.jsdelivr.net/npm/lightbox2@2/dist/css/lightbox.min.css" rel="stylesheet" />
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Playfair Display', serif;
+      background-color: #fff8f2;
+      color: #222;
+      scroll-behavior: smooth;
+      overflow-x: hidden;
+    }
+
+    nav {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      background-color: rgba(255, 255, 255, 0.95);
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+      z-index: 1000;
+      flex-wrap: wrap;
+    }
+
+    nav a {
+      text-decoration: none;
+      color: #333;
+      font-weight: bold;
+      transition: color 0.3s ease;
+      white-space: nowrap;
+      padding: 0.3rem 0;
+    }
+
+    nav a:hover {
+      color: #c0392b;
+    }
+
+    header {
+      background-image: url('/assets/lambunderthebell.jpg');
+      background-size: cover;
+      background-position: center;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      color: white;
+      text-shadow: 2px 2px 10px #000;
+      animation: zoomOut 10s ease-in-out forwards;
+      transition: background-image 1s ease-in-out;
+      padding: 0 1rem;
+      text-align: center;
+    }
+
+    @keyframes zoomOut {
+      0% { transform: scale(1.05); }
+      100% { transform: scale(1); }
+    }
+
+    header h1 { 
+      font-size: 4rem; 
+      margin-bottom: 1rem; 
+    }
+    header p { font-size: 1.5rem; }
+
+    section {
+      padding: 5rem 2rem;
+      text-align: center;
+    }
+
+    section h2 {
+      font-size: 2.5rem;
+      margin-bottom: 2rem;
+      color: #c0392b;
+    }
+
+    /* Meni */
+    .menu-columns {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 2rem;
+      justify-content: center;
+      margin-top: 2rem;
+    }
+
+    .menu-column {
+      flex: 1 1 300px;
+      max-width: 500px;
+      background-color: #fff3e6;
+      padding: 2rem;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
+
+    .menu-column h3 {
+      color: #c0392b;
+      margin-bottom: 0.5rem;
+      font-size: 1.3rem;
+      border-bottom: 1px solid #ddd;
+      padding-bottom: 0.5rem;
+    }
+
+    .menu-column ul {
+      list-style: none;
+      padding: 0;
+      margin-bottom: 1.5rem;
+    }
+
+    .menu-column li {
+      display: flex;
+      justify-content: space-between;
+      margin: 0.3rem 0;
+      border-bottom: 1px dotted #ccc;
+      padding-bottom: 0.3rem;
+    }
+
+    /* Galerija */
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1.5rem;
+      justify-items: center;
+    }
+
+    .gallery img {
+      width: 100%;
+      height: 250px;
+      object-fit: cover;
+      border-radius: 12px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+      transition: transform 0.3s ease;
+    }
+
+    .gallery img:hover {
+      transform: scale(1.06);
+    }
+
+    footer {
+      background-color: #333;
+      color: white;
+      text-align: center;
+      padding: 2rem;
+    }
+    .about-section {
+      background: linear-gradient(135deg, #fff3e6 0%, #ffe6cc 100%);
+      padding: 5rem 2rem;
+    }
+
+    .about-content {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 2rem;
+    }
+
+    .about-image {
+      flex: 1 1 400px;
+    }
+
+    .about-image img {
+      width: 100%;
+      max-width: 300px;
+      height: auto;
+      max-height: 400px;
+      border-radius: 15px;
+      box-shadow: 0 6px 18px rgba(0,0,0,0.15);
+      transition: transform 0.3s ease;
+    }
+
+    .about-image img:hover {
+      transform: scale(1.02);
+    }
+
+    .about-text {
+      flex: 1 1 500px;
+      text-align: left;
+    }
+
+    .about-text h2 {
+      font-size: 2.5rem;
+      color: #c0392b;
+      margin-bottom: 1rem;
+    }
+
+    .about-text p {
+      font-size: 1.1rem;
+      margin-bottom: 1rem;
+      line-height: 1.6;
+    }
+
+    /* Responsive adjustments */
+    @media (max-width: 1200px) {
+      header h1 {
+        font-size: 3.5rem;
+      }
+    }
+
+    @media (max-width: 992px) {
+      nav {
+        gap: 1.5rem;
+        padding: 1rem;
+      }
+      
+      header h1 {
+        font-size: 3rem;
+      }
+      
+      section {
+        padding: 4rem 1.5rem;
+      }
+      
+      .about-content {
+        flex-direction: column;
+        text-align: center;
+      }
+      
+      .about-text {
+        text-align: center;
+      }
+      
+      .about-image img {
+        margin: 0 auto;
+      }
+    }
+
+    @media (max-width: 768px) {
+      header h1 {
+        font-size: 2.5rem;
+      }
+      
+      header p {
+        font-size: 1.2rem;
+      }
+      
+      nav {
+        gap: 1rem;
+        padding: 0.8rem;
+      }
+      
+      section h2 {
+        font-size: 2rem;
+      }
+      
+      .menu-column {
+        padding: 1.5rem;
+      }
+      
+      .gallery {
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      }
+      
+      .gallery img {
+        height: 200px;
+      }
+    }
+
+    @media (max-width: 576px) {
+      header h1 {
+        font-size: 2rem;
+      }
+      
+      header p {
+        font-size: 1rem;
+      }
+      
+      nav {
+        flex-direction: column;
+        align-items: center;
+        gap: 0.5rem;
+        padding: 0.5rem;
+      }
+      
+      nav a {
+        padding: 0.2rem 0;
+      }
+      
+      #languageSwitcher {
+        margin-top: 0.5rem;
+      }
+      
+      section {
+        padding: 3rem 1rem;
+      }
+      
+      section h2 {
+        font-size: 1.8rem;
+        margin-bottom: 1.5rem;
+      }
+      
+      .menu-column {
+        padding: 1rem;
+      }
+      
+      .menu-column h3 {
+        font-size: 1.1rem;
+      }
+      
+      .about-text h2 {
+        font-size: 2rem;
+      }
+      
+      .about-text p {
+        font-size: 1rem;
+      }
+      
+      .gallery {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 400px) {
+      header h1 {
+        font-size: 1.8rem;
+      }
+      
+      .menu-column li {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+      
+      .menu-column li span:last-child {
+        margin-top: 0.2rem;
+        align-self: flex-end;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <nav data-aos="fade-down">
+    <a href="#onama" data-i18n="nav.about">O nama</a>
+    <a href="#meni" data-i18n="nav.menu">Meni</a>
+    <a href="#galerija" data-i18n="nav.gallery">Galerija</a>
+    <a href="#kontakt" data-i18n="nav.contact">Kontakt</a>
+    <select id="languageSwitcher" style="padding: 0.3rem; border-radius: 6px;">
+        <option value="hr">HR</option>
+        <option value="en">EN</option>
+        <option value="de">DE</option>
+        <option value="it">IT</option>
+        <option value="cz">CZ</option>
+    </select>
+  </nav>
+
+  <header id="hero" class="hero animate__animated animate__fadeIn" data-aos="fade">
+    <h1 data-i18n="hero.title" data-aos="fade-up" data-aos-delay="300">Konoba Dva Goluba</h1>
+    <p data-i18n="hero.subtitle" data-aos="fade-up" data-aos-delay="500">Autentični okusi uz more u Dubokoj</p>
+  </header>
+
+  <section id="onama" class="about-section" data-aos="fade-up">
+    <section id="about" style="background-color: #fce8d8; padding: 60px 20px;">
+      <div class="container" style="display: flex; flex-wrap: wrap; align-items: center; text-align: left; justify-content: center; gap: 40px; max-width: 1200px; margin: auto;">
+        
+        <!-- Slika lijevo -->
+        <div style="flex: 1; min-width: 280px; max-width: 300px;" data-aos="fade-right">
+          <img src="assets/eksterijer.png" alt="Konoba slika" style="width: 100%; max-width: 300px; border-radius: 16px; box-shadow: 0 4px 20px rgba(0,0,0,0.1);">
+        </div>
+        
+        <!-- Tekst desno -->
+        <div style="flex: 1; min-width: 280px; max-width: 600px;" data-aos="fade-left">
+          <h2 data-i18n="about.title" style="color: #c1442e;">Dobrodošli u Konobu Dva Goluba</h2>
+          <p data-i18n="about.1">Smješteni uz obalu prekrasne Duboke, naša konoba je pravo mjesto za sve ljubitelje domaće hrane i autentične atmosfere.</p>
+          <p data-i18n="about.2">Koristimo samo lokalne i svježe sastojke – iz mora direktno na tanjur. Uživajte u ribljim specijalitetima, mesnim platama i domaćem kruhu koji svakodnevno pečemo sami.</p>
+          <p data-i18n="about.3">Naš cilj je jednostavan: dobar zalogaj, čaša vina i zvuk mora.</p>
+          <p data-i18n="about.4">Posjetite nas!</p>
+        </div>
+      </div>
+    </section>
+  </section>
+
+  <section id="meni" class="animate__animated animate__fadeInUp" data-aos="fade-up">
+    <h2 data-i18n="menu.title" data-aos="fade-up">Naš meni</h2>
+    <div class="menu-columns" data-aos="fade-up" data-aos-delay="200">
+
+      <div class="menu-column" data-aos="fade-up" data-aos-delay="300">
+        <h3 data-i18n="menu.coldStarters">Hladna predjela / Cold starters</h3>
+        <ul>
+          <li><span data-i18n="menu.coldPlatter">Hladna plata</span> <span>18.00 €</span></li>
+          <li><span data-i18n="menu.dvaGolubaPlatter">Plata "Dva Goluba"</span> <span>30.00 €</span></li>
+          <li><span data-i18n="menu.octopusSalad">Salata od hobotnice</span> <span>15.00 €</span></li>
+          <li><span data-i18n="menu.cuttlefishSalad">Salata od sipe</span> <span>15.00 €</span></li>
+          <li><span data-i18n="menu.octopusPlatter">Plata od hobotnice</span> <span>20.00 €</span></li>
+        </ul>
+
+        <h3 data-i18n="menu.salads">Salate / Salads</h3>
+        <ul>
+          <li><span data-i18n="menu.tuna">Tuna</span> <span>10.00 €</span></li>
+          <li><span data-i18n="menu.caesar">Caesar</span> <span>10.00 €</span></li>
+          <li><span data-i18n="menu.green">Zelena / Green leaf</span> <span>4.00 €</span></li>
+          <li><span data-i18n="menu.seasonal">Sezonska / Seasonal</span> <span>4.00 €</span></li>
+          <li><span data-i18n="menu.cabbage">Kupus / Cabbage</span> <span>4.00 €</span></li>
+        </ul>
+
+        <h3 data-i18n="menu.pasta">Tjestenine / Pasta</h3>
+        <ul>
+          <li><span data-i18n="menu.tunaTagliatelle">Tagliatelle s tunom</span> <span>12.00 €</span></li>
+          <li><span data-i18n="menu.seafoodTagliatelle">Tagliatelle s plodovima mora</span> <span>15.00 €</span></li>
+          <li><span data-i18n="menu.shrimpTagliatelle">Tagliatelle sa kozicama</span> <span>15.00 €</span></li>
+          <li><span data-i18n="menu.chickenTagliatelle">Tagliatelle s piletinom</span> <span>12.00 €</span></li>
+        </ul>
+
+        <h3 data-i18n="menu.risotto">Rižoto / Risotto</h3>
+        <ul>
+          <li><span data-i18n="menu.seafoodRisotto">Rižoto plodovi mora</span> <span>15.00 €</span></li>
+          <li><span data-i18n="menu.blackRisotto">Crni rižoto / Black risotto</span> <span>15.00 €</span></li>
+          <li><span data-i18n="menu.shrimpRisotto">Rižoto od kozica / Shrimp risotto</span> <span>15.00 €</span></li>
+          <li><span data-i18n="menu.chickenRisotto">Rižoto s piletinom / Chicken risotto</span> <span>12.00 €</span></li>
+          <li><span data-i18n="menu.veggieRisotto">Vegetarijanski rižoto</span> <span>12.00 €</span></li>
+        </ul>
+      </div>
+
+      <div class="menu-column" data-aos="fade-up" data-aos-delay="400">
+        <h3 data-i18n="menu.fish">Riblja ponuda / Fish offer</h3>
+        <ul>
+          <li><span data-i18n="menu.squid">Lignje</span> <span>17.00 €</span></li>
+          <li><span data-i18n="menu.grilledSquid">Lignje na žaru</span> <span>18.00 €</span></li>
+          <li><span data-i18n="menu.friedSquid">Pohane lignje</span> <span>17.00 €</span></li>
+          <li><span data-i18n="menu.adriaticSquid">Jadranska lignja</span> <span>22.00 €</span></li>
+          <li><span data-i18n="menu.seaBream">Orada / Sea bream</span> <span>80.00 €/kg</span></li>
+          <li><span data-i18n="menu.seaBass">Lubin / Sea bass</span> <span>80.00 €/kg</span></li>
+          <li><span data-i18n="menu.skarpina">Škarpina</span> <span>80.00 €/kg</span></li>
+          <li><span data-i18n="menu.sole">List / Sole</span> <span>80.00 €/kg</span></li>
+          <li><span data-i18n="menu.octopus">Hobotnica / Octopus</span> <span>80.00 €/kg</span></li>
+          <li><span data-i18n="menu.scampi">Škampi / Scampi</span> <span>90.00 €/kg</span></li>
+          <li><span data-i18n="menu.fishPlatter">Riblja plata za 2 osobe</span> <span>32.00 €</span></li>
+        </ul>
+
+        <h3 data-i18n="menu.meat">Mesna jela / Meat offer</h3>
+        <ul>
+          <li><span data-i18n="menu.rumpSteak">Ramstek / Rump steak</span> <span>20.00 €</span></li>
+          <li><span data-i18n="menu.pljeskavica">Pljeskavica</span> <span>12.00 €</span></li>
+          <li><span data-i18n="menu.chickenBreast">Pileći file / Chicken breast</span> <span>12.00 €</span></li>
+          <li><span data-i18n="menu.mixedMeat">Miješano meso / Mixed meat</span> <span>17.00 €</span></li>
+          <li><span data-i18n="menu.tagliata">Tagliata</span> <span>20.00 €</span></li>
+          <li><span data-i18n="menu.mixedMeat2">Miješano meso za 2 osobe</span> <span>30.00 €</span></li>
+        </ul>
+
+        <h3 data-i18n="menu.sides">Prilozi / Side dishes</h3>
+        <ul>
+          <li><span data-i18n="menu.fries">Pomfrit / French fries</span> <span>4.00 €</span></li>
+          <li><span data-i18n="menu.grilledVeggies">Povrće s roštilja</span> <span>5.00 €</span></li>
+          <li><span data-i18n="menu.rice">Riža / Rice</span> <span>4.00 €</span></li>
+          <li><span data-i18n="menu.croquettes">Kroketi</span> <span>4.00 €</span></li>
+          <li><span data-i18n="menu.oysters">Kamenice</span> <span>1.50 €</span></li>
+          <li><span data-i18n="menu.bread">Kruh / Bread</span> <span>1.00 €</span></li>
+          <li><span data-i18n="menu.homemadeBread">Domaći kruh</span> <span>2.00 €</span></li>
+          <li><span data-i18n="menu.mayo">Majoneza</span> <span>1.00 €</span></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section id="galerija" class="animate__animated animate__fadeInUp" data-aos="fade-up">
+    <h2 data-i18n="galerija-jela" data-aos="fade-up">Galerija jela</h2>
+    <div class="gallery" data-aos="fade-up" data-aos-delay="200">
+      <a href="/assets/mjesanomjeso.png" data-lightbox="gallery" data-aos="fade-up" data-aos-delay="300">
+        <img src="/assets/mjesanomjeso.png" alt="Miješano meso">
+      </a>
+      <a href="/assets/riba.png" data-lightbox="gallery" data-aos="fade-up" data-aos-delay="400">
+        <img src="/assets/riba.png" alt="Grilana riba">
+      </a>
+      <a href="/assets/nesto.png" data-lightbox="gallery" data-aos="fade-up" data-aos-delay="500">
+        <img src="/assets/nesto.png" alt="Predjelo">
+      </a>
+      <a href="/assets/stolovi.png" data-lightbox="gallery" data-aos="fade-up" data-aos-delay="600">
+        <img src="/assets/stolovi.png" alt="Pripremljeni stolovi">
+      </a>
+    </div>
+  </section>
+
+  <section id="kontakt" class="animate__animated animate__fadeInUp" data-aos="fade-up">
+    <h2 data-i18n="contact.title" data-aos="fade-up">Kontakt</h2>
+    <p data-i18n="contact.address" data-aos="fade-up" data-aos-delay="200">Adresa: Duboka bb, Hrvatska...</p>
+  </section>
+
+  <footer data-aos="fade-up">
+    <p>&copy; 2025 Konoba Dva Goluba. Sva prava pridržana.</p>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/lightbox2@2/dist/js/lightbox.min.js"></script>
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script>
+    AOS.init({
+      duration: 800,
+      easing: 'ease-in-out',
+      once: true,
+      offset: 120
+    });
+
+    const translations = {
+      "hr": {
+        "nav.about": "O nama",
+        "nav.menu": "Meni",
+        "nav.gallery": "Galerija",
+        "nav.contact": "Kontakt",
+        "hero.title": "Konoba Dva Goluba",
+        "hero.subtitle": "Autentični okusi uz more u Dubokoj",
+        "about.title": "Dobrodošli u Konobu Dva Goluba",
+        "about.1": "Smješteni uz obalu prekrasne Duboke, naša konoba je pravo mjesto za sve ljubitelje domaće hrane i autentične atmosfere.",
+        "about.2": "Koristimo samo lokalne i svježe sastojke – iz mora direktno na tanjur. Uživajte u ribljim specijalitetima, mesnim platama i domaćem kruhu koji svakodnevno pečemo sami.",
+        "about.3": "Naš cilj je jednostavan: dobar zalogaj, čaša vina i zvuk mora.",
+        "about.4": "Posjetite nas!",
+        "contact.title": "Kontakt",
+        "contact.address": "Adresa: Duboka bb, Hrvatska<br>Rezervacije: +385 91 000 0000<br>Email: info@dvagoluba.hr",
+        "menu.title": "Naš meni",
+        "menu.starters": "Hladna predjela",
+        "menu.salads": "Salate",
+        "menu.pasta": "Tjestenine",
+        "menu.risotto": "Rižoto",
+        "menu.fish": "Riblja ponuda",
+        "menu.meat": "Mesna jela",
+        "menu.sides": "Prilozi",
+        "galerija-jela": "Galerija Jela"
+      },
+      "en": {
+        "nav.about": "About Us",
+        "nav.menu": "Menu",
+        "nav.gallery": "Gallery",
+        "nav.contact": "Contact",
+        "hero.title": "Konoba Dva Goluba",
+        "hero.subtitle": "Authentic seaside flavors in Duboka",
+        "about.title": "Welcome to Konoba Dva Goluba",
+        "about.1": "Located on the coast of beautiful Duboka, our tavern is the perfect place for lovers of homemade food and authentic atmosphere.",
+        "about.2": "We use only local and fresh ingredients – from the sea straight to your plate. Enjoy fish specialties, meat platters, and homemade bread we bake daily.",
+        "about.3": "Our goal is simple: a good bite, a glass of wine, and the sound of the sea.",
+        "about.4": "Visit us!",
+        "contact.title": "Contact",
+        "contact.address": "Address: Duboka bb, Croatia<br>Reservations: +385 91 000 0000<br>Email: info@dvagoluba.hr",
+        "menu.title": "Our Menu",
+        "menu.starters": "Cold Starters",
+        "menu.salads": "Salads",
+        "menu.pasta": "Pasta",
+        "menu.risotto": "Risotto",
+        "menu.fish": "Fish Offer",
+        "menu.meat": "Meat Dishes",
+        "menu.sides": "Side Dishes",
+        "galerija-jela": "Food Gallery"
+      },
+      "de": {
+        "nav.about": "Über uns",
+        "nav.menu": "Menü",
+        "nav.gallery": "Galerie",
+        "nav.contact": "Kontakt",
+        "hero.title": "Konoba Dva Goluba",
+        "hero.subtitle": "Authentische Aromen am Meer in Duboka",
+        "about.title": "Willkommen in der Konoba Dva Goluba",
+        "about.1": "Direkt an der Küste von Duboka gelegen, ist unsere Konoba der perfekte Ort für Liebhaber von hausgemachtem Essen und authentischer Atmosphäre.",
+        "about.2": "Wir verwenden nur lokale und frische Zutaten – direkt aus dem Meer auf Ihren Teller. Genießen Sie Fischspezialitäten, Fleischplatten und hausgemachtes Brot, das wir täglich backen.",
+        "about.3": "Unser Ziel ist einfach: ein guter Bissen, ein Glas Wein und das Rauschen des Meeres.",
+        "about.4": "Besuchen Sie uns!",
+        "contact.title": "Kontakt",
+        "contact.address": "Adresse: Duboka bb, Kroatien<br>Reservierungen: +385 91 000 0000<br>Email: info@dvagoluba.hr",
+        "menu.title": "Unsere Speisekarte",
+        "menu.starters": "Kalte Vorspeisen",
+        "menu.salads": "Salate",
+        "menu.pasta": "Pasta",
+        "menu.risotto": "Risotto",
+        "menu.fish": "Fischgerichte",
+        "menu.meat": "Fleischgerichte",
+        "menu.sides": "Beilagen",
+        "galerija-jela": "Jela-Galerie"
+      },
+      "it": {
+        "nav.about": "Chi siamo",
+        "nav.menu": "Menu",
+        "nav.gallery": "Galleria",
+        "nav.contact": "Contatto",
+        "hero.title": "Konoba Dva Goluba",
+        "hero.subtitle": "Sapori autentici sul mare a Duboka",
+        "about.title": "Benvenuti alla Konoba Dva Goluba",
+        "about.1": "Situato sulla costa della splendida Duboka, la nostra konoba è il posto perfetto per gli amanti del cibo fatto in casa e dell'atmosfera autentica.",
+        "about.2": "Usiamo solo ingredienti locali e freschi – dal mare direttamente nel piatto. Godetevi specialità di pesce, piatti di carne e pane fatto in casa che cuociamo ogni giorno.",
+        "about.3": "Il nostro obiettivo è semplice: un buon boccone, un bicchiere di vino e il suono del mare.",
+        "about.4": "Venite a trovarci!",
+        "contact.title": "Contatto",
+        "contact.address": "Indirizzo: Duboka bb, Croazia<br>Prenotazioni: +385 91 000 0000<br>Email: info@dvagoluba.hr",
+        "menu.title": "Il nostro menu",
+        "menu.starters": "Antipasti freddi",
+        "menu.salads": "Insalate",
+        "menu.pasta": "Pasta",
+        "menu.risotto": "Risotti",
+        "menu.fish": "Piatti di pesce",
+        "menu.meat": "Piatti di carne",
+        "menu.sides": "Contorni",
+        "galerija-jela": "Galleria Jela"
+      },
+      "cz": {
+        "nav.about": "O nás",
+        "nav.menu": "Jídelní lístek",
+        "nav.gallery": "Galerie",
+        "nav.contact": "Kontakt",
+        "hero.title": "Konoba Dva Goluba",
+        "hero.subtitle": "Autentické chutě u moře v Duboka",
+        "about.title": "Vítejte v Konobě Dva Goluba",
+        "about.1": "Nachází se na pobřeží krásné Duboky, naše konoba je ideálním místem pro milovníky domácí kuchyně a autentické atmosféry.",
+        "about.2": "Používáme pouze místní a čerstvé suroviny – z moře přímo na talíř. Ochutnejte rybí speciality, masové mísy a domácí chléb, který každý den pečeme sami.",
+        "about.3": "Náš cíl je jednoduchý: dobré jídlo, sklenka vína a zvuk moře.",
+        "about.4": "Navštivte nás!",
+        "contact.title": "Kontakt",
+        "contact.address": "Adresa: Duboka bb, Chorvatsko<br>Rezervace: +385 91 000 0000<br>Email: info@dvagoluba.hr",
+        "menu.title": "Nabídka",
+        "menu.starters": "Studené předkrmy",
+        "menu.salads": "Saláty",
+        "menu.pasta": "Těstoviny",
+        "menu.risotto": "Rizota",
+        "menu.fish": "Rybí nabídka",
+        "menu.meat": "Masová jídla",
+        "menu.sides": "Přílohy",
+        "galerija-jela": "Galerie Jela"
+      }
+    };
+
+    function updateLanguage(lang) {
+      // Update all elements with data-i18n attributes
+      document.querySelectorAll("[data-i18n]").forEach(el => {
+        const key = el.getAttribute("data-i18n");
+        if (translations[lang][key]) {
+          el.innerHTML = translations[lang][key];
+        }
+      });
+
+      // Update long text manually if defined
+      const aboutTextContainer = document.querySelector(".about-text");
+      if (aboutTextContainer && lang !== "hr") {
+        aboutTextContainer.querySelector("h2").innerText = translations[lang]["about.title"];
+        aboutTextContainer.querySelectorAll("p")[0].innerText = translations[lang]["about.1"] || "";
+        aboutTextContainer.querySelectorAll("p")[1].innerText = ""; // You can define about.2 etc.
+        aboutTextContainer.querySelectorAll("p")[2].innerText = "";
+        aboutTextContainer.querySelectorAll("p")[3].innerText = "";
+      } else if (lang === "hr") {
+        // Reset to original Croatian content
+        aboutTextContainer.querySelector("h2").innerText = "Dobrodošli u Konobu Dva Goluba";
+        aboutTextContainer.querySelectorAll("p")[0].innerHTML = "<strong>Smješteni uz obalu</strong> prekrasne Duboke, naša konoba je pravo mjesto za sve ljubitelje domaće hrane i autentične atmosfere.";
+        aboutTextContainer.querySelectorAll("p")[1].innerHTML = "Koristimo samo <strong>lokalne i svježe sastojke</strong> – iz mora direktno na tanjur. Uživajte u ribljim specijalitetima, mesnim platama i domaćem kruhu koji svakodnevno pečemo sami.";
+        aboutTextContainer.querySelectorAll("p")[2].innerHTML = "Naš cilj je jednostavan: <em>dobar zalogaj, čaša vina i zvuk mora.</em>";
+        aboutTextContainer.querySelectorAll("p")[3].innerText = "Posjetite nas!";
+      }
+    }
+
+    // Language switcher
+    document.getElementById("languageSwitcher").addEventListener("change", function () {
+      updateLanguage(this.value);
+    });
+    document.querySelectorAll('.navbar-collapse .nav-link').forEach(link => {
+      link.addEventListener('click', () => {
+        const navbarCollapse = document.querySelector('.navbar-collapse');
+        if (navbarCollapse.classList.contains('show')) {
+          new bootstrap.Collapse(navbarCollapse).toggle();
+        }
+      });
+    });
+
+    // Initialize default language
+    updateLanguage("hr");
+    const hero = document.getElementById('hero');
+    const images = [
+      '/assets/lambunderthebell.jpg',
+      '/assets/ribee.png',
+      '/assets/nesto2.png'
+    ];
+    let current = 1;
+
+    function changeBackground() {
+      hero.style.backgroundImage = `url('${images[current]}')`;
+      hero.style.animation = 'none';
+      void hero.offsetWidth;
+      hero.style.animation = 'zoomOut 10s ease-in-out forwards';
+      current = (current + 1) % images.length;
+    }
+
+    setInterval(changeBackground, 4000);
+    const savedLang = localStorage.getItem('selectedLang') || 'hr';
+    document.getElementById("languageSwitcher").value = savedLang;
+    updateLanguage(savedLang);
+
+    document.getElementById("languageSwitcher").addEventListener("change", function () {
+      const lang = this.value;
+      localStorage.setItem('selectedLang', lang);
+      updateLanguage(lang);
+    });
+  </script>
+</body>
+</html>
