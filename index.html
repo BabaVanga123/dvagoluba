@@ -16,34 +16,218 @@
       color: #222;
       scroll-behavior: smooth;
       overflow-x: hidden;
+      padding-top: 80px; /* Space for fixed navbar */
     }
 
+    /* Modern Navbar */
     nav {
       position: fixed;
       top: 0;
       width: 100%;
-      background-color: rgba(255, 255, 255, 0.95);
-      padding: 1rem 2rem;
-      display: flex;
-      justify-content: center;
-      gap: 2rem;
+      background-color: rgba(255, 255, 255, 0.98);
+      box-shadow: 0 2px 20px rgba(0, 0, 0, 0.08);
+      padding: 0;
       z-index: 1000;
-      flex-wrap: wrap;
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+      transition: all 0.3s ease;
     }
 
-    nav a {
+    .nav-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      height: 80px;
+    }
+
+    .logo {
+      font-family: 'Playfair Display', serif;
+      font-weight: 700;
+
+      font-size: 1.5rem;
+      color: #c0392b;
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+    }
+
+    .logo img {
+      height:100px;
+      height:100px;
+      margin-right: 10px;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      transition: all 0.3s ease;
+    }
+
+    .nav-links a {
       text-decoration: none;
       color: #333;
-      font-weight: bold;
-      transition: color 0.3s ease;
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 500;
+      font-size: 0.95rem;
+      padding: 0.8rem 1rem;
+      margin: 0 0.2rem;
+      position: relative;
+      transition: all 0.3s ease;
       white-space: nowrap;
-      padding: 0.3rem 0;
     }
 
-    nav a:hover {
+    .nav-links a:hover {
       color: #c0392b;
     }
 
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      width: 0;
+      height: 2px;
+      bottom: 0;
+      left: 0;
+      background-color: #c0392b;
+      transition: width 0.3s ease;
+    }
+
+    .nav-links a:hover::after {
+      width: 100%;
+    }
+
+    .language-selector {
+      margin-left: 1rem;
+      position: relative;
+    }
+
+    #languageSwitcher {
+      padding: 0.4rem 0.8rem;
+      border-radius: 20px;
+      border: 1px solid #ddd;
+      background-color: white;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 0.85rem;
+      cursor: pointer;
+      appearance: none;
+      -webkit-appearance: none;
+      -moz-appearance: none;
+      padding-right: 2rem;
+      background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+      background-repeat: no-repeat;
+      background-position: right 0.7rem center;
+      background-size: 1rem;
+      transition: all 0.3s ease;
+    }
+
+    #languageSwitcher:hover {
+      border-color: #c0392b;
+    }
+
+    .hamburger {
+      display: none;
+      cursor: pointer;
+      background: none;
+      border: none;
+      padding: 10px;
+      z-index: 1001;
+    }
+
+    .hamburger span {
+      display: block;
+      width: 25px;
+      height: 2px;
+      background: #333;
+      margin: 5px 0;
+      transition: all 0.3s ease;
+      position: relative;
+    }
+
+    /* Mobile menu styles */
+    /* Improved mobile menu styles */
+@media (max-width: 992px) {
+  .hamburger {
+    display: block;
+  }
+  .logo img{
+    height:60px;
+    width:60px;
+  }
+  .nav-links {
+    position: fixed;
+    top: 80px;
+    left: 0;
+    width: 100%;
+    height: calc(100vh - 80px);
+    background-color: white;
+    flex-direction: column;
+    align-items: center;
+    padding: 2rem 0;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+    transform: translateY(-150%);
+    opacity: 0;
+    pointer-events: none;
+    transition: all 0.4s ease;
+    overflow-y: auto;
+    z-index: 999;
+  }
+
+  .nav-links.active {
+    transform: translateY(0);
+    opacity: 1;
+    pointer-events: all;
+  }
+
+  .nav-links a {
+    padding: 1rem;
+    margin: 0.5rem 0;
+    font-size: 1.1rem;
+    width: 100%;
+    text-align: center;
+  }
+
+  .language-selector {
+    margin: 1rem 0 0;
+    width: 80%;
+    max-width: 200px;
+  }
+  
+  /* Prevent scrolling when menu is open */
+  body.menu-open {
+    overflow: hidden;
+    height: 100%;
+    position: fixed;
+    width: 100%;
+  }
+}
+
+    /* Navbar scroll effect */
+    nav.scrolled {
+      height: 70px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    }
+
+    nav.scrolled .nav-container {
+      height: 70px;
+    }
+
+    /* Hamburger animation */
+    .hamburger.active span:nth-child(1) {
+      transform: translateY(7px) rotate(45deg);
+    }
+
+    .hamburger.active span:nth-child(2) {
+      opacity: 0;
+    }
+
+    .hamburger.active span:nth-child(3) {
+      transform: translateY(-7px) rotate(-45deg);
+    }
+
+    /* Rest of your existing styles... */
     header {
       background-image: url('assets/lambunderthebell.jpg');
       background-size: cover;
@@ -59,6 +243,7 @@
       transition: background-image 1s ease-in-out;
       padding: 0 1rem;
       text-align: center;
+      margin-top: -80px; /* Compensate for fixed navbar */
     }
 
     @keyframes zoomOut {
@@ -271,7 +456,7 @@
       }
       
       header p {
-        font-size: 1rem;
+        font-size: 1rem;  
       }
       
       nav {
@@ -338,18 +523,36 @@
 </head>
 <body>
 
-  <nav data-aos="fade-down">
-    <a href="#onama" data-i18n="nav.about">O nama</a>
-    <a href="#meni" data-i18n="nav.menu">Meni</a>
-    <a href="#galerija" data-i18n="nav.gallery">Galerija</a>
-    <a href="#kontakt" data-i18n="nav.contact">Kontakt</a>
-    <select id="languageSwitcher" style="padding: 0.3rem; border-radius: 6px;">
-        <option value="hr">HR</option>
-        <option value="en">EN</option>
-        <option value="de">DE</option>
-        <option value="it">IT</option>
-        <option value="cz">CZ</option>
-    </select>
+<nav data-aos="fade-down" id="mainNav">
+    <div class="nav-container">
+      <a href="#" class="logo">
+        <img src="assets/dvagolubakonoba.png" alt=>
+
+      </a>
+      
+      <button class="hamburger" id="hamburger">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+      
+      <div class="nav-links" id="navLinks">
+        <a href="#onama" data-i18n="nav.about">O nama</a>
+        <a href="#meni" data-i18n="nav.menu">Meni</a>
+        <a href="#galerija" data-i18n="nav.gallery">Galerija</a>
+        <a href="#kontakt" data-i18n="nav.contact">Kontakt</a>
+        
+        <div class="language-selector">
+          <select id="languageSwitcher">
+            <option value="hr">HR</option>
+            <option value="en">EN</option>
+            <option value="de">DE</option>
+            <option value="it">IT</option>
+            <option value="cz">CZ</option>
+          </select>
+        </div>
+      </div>
+    </div>
   </nav>
 
   <header id="hero" class="hero animate__animated animate__fadeIn" data-aos="fade">
@@ -490,179 +693,118 @@
   <script src="https://cdn.jsdelivr.net/npm/lightbox2@2/dist/js/lightbox.min.js"></script>
   <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
   <script>
-    AOS.init({
-      duration: 800,
-      easing: 'ease-in-out',
-      once: true,
-      offset: 120
-    });
+  // Initialize AOS animation library
+  AOS.init({
+    duration: 800,
+    easing: 'ease-in-out',
+    once: true,
+    offset: 120
+  });
 
-    const translations = {
-      "hr": {
-        "nav.about": "O nama",
-        "nav.menu": "Meni",
-        "nav.gallery": "Galerija",
-        "nav.contact": "Kontakt",
-        "hero.title": "Konoba Dva Goluba",
-        "hero.subtitle": "Autentični okusi uz more u Dubokoj",
-        "about.title": "Dobrodošli u Konobu Dva Goluba",
-        "about.1": "Smješteni uz obalu prekrasne Duboke, naša konoba je pravo mjesto za sve ljubitelje domaće hrane i autentične atmosfere.",
-        "about.2": "Koristimo samo lokalne i svježe sastojke – iz mora direktno na tanjur. Uživajte u ribljim specijalitetima, mesnim platama i domaćem kruhu koji svakodnevno pečemo sami.",
-        "about.3": "Naš cilj je jednostavan: dobar zalogaj, čaša vina i zvuk mora.",
-        "about.4": "Posjetite nas!",
-        "contact.title": "Kontakt",
-        "contact.address": "Adresa: Duboka bb, Hrvatska<br>Rezervacije: +385 91 000 0000<br>Email: info@dvagoluba.hr",
-        "menu.title": "Naš meni",
-        "menu.starters": "Hladna predjela",
-        "menu.salads": "Salate",
-        "menu.pasta": "Tjestenine",
-        "menu.risotto": "Rižoto",
-        "menu.fish": "Riblja ponuda",
-        "menu.meat": "Mesna jela",
-        "menu.sides": "Prilozi",
-        "galerija-jela": "Galerija Jela"
-      },
-      "en": {
-        "nav.about": "About Us",
-        "nav.menu": "Menu",
-        "nav.gallery": "Gallery",
-        "nav.contact": "Contact",
-        "hero.title": "Konoba Dva Goluba",
-        "hero.subtitle": "Authentic seaside flavors in Duboka",
-        "about.title": "Welcome to Konoba Dva Goluba",
-        "about.1": "Located on the coast of beautiful Duboka, our tavern is the perfect place for lovers of homemade food and authentic atmosphere.",
-        "about.2": "We use only local and fresh ingredients – from the sea straight to your plate. Enjoy fish specialties, meat platters, and homemade bread we bake daily.",
-        "about.3": "Our goal is simple: a good bite, a glass of wine, and the sound of the sea.",
-        "about.4": "Visit us!",
-        "contact.title": "Contact",
-        "contact.address": "Address: Duboka bb, Croatia<br>Reservations: +385 91 000 0000<br>Email: info@dvagoluba.hr",
-        "menu.title": "Our Menu",
-        "menu.starters": "Cold Starters",
-        "menu.salads": "Salads",
-        "menu.pasta": "Pasta",
-        "menu.risotto": "Risotto",
-        "menu.fish": "Fish Offer",
-        "menu.meat": "Meat Dishes",
-        "menu.sides": "Side Dishes",
-        "galerija-jela": "Food Gallery"
-      },
-      "de": {
-        "nav.about": "Über uns",
-        "nav.menu": "Menü",
-        "nav.gallery": "Galerie",
-        "nav.contact": "Kontakt",
-        "hero.title": "Konoba Dva Goluba",
-        "hero.subtitle": "Authentische Aromen am Meer in Duboka",
-        "about.title": "Willkommen in der Konoba Dva Goluba",
-        "about.1": "Direkt an der Küste von Duboka gelegen, ist unsere Konoba der perfekte Ort für Liebhaber von hausgemachtem Essen und authentischer Atmosphäre.",
-        "about.2": "Wir verwenden nur lokale und frische Zutaten – direkt aus dem Meer auf Ihren Teller. Genießen Sie Fischspezialitäten, Fleischplatten und hausgemachtes Brot, das wir täglich backen.",
-        "about.3": "Unser Ziel ist einfach: ein guter Bissen, ein Glas Wein und das Rauschen des Meeres.",
-        "about.4": "Besuchen Sie uns!",
-        "contact.title": "Kontakt",
-        "contact.address": "Adresse: Duboka bb, Kroatien<br>Reservierungen: +385 91 000 0000<br>Email: info@dvagoluba.hr",
-        "menu.title": "Unsere Speisekarte",
-        "menu.starters": "Kalte Vorspeisen",
-        "menu.salads": "Salate",
-        "menu.pasta": "Pasta",
-        "menu.risotto": "Risotto",
-        "menu.fish": "Fischgerichte",
-        "menu.meat": "Fleischgerichte",
-        "menu.sides": "Beilagen",
-        "galerija-jela": "Jela-Galerie"
-      },
-      "it": {
-        "nav.about": "Chi siamo",
-        "nav.menu": "Menu",
-        "nav.gallery": "Galleria",
-        "nav.contact": "Contatto",
-        "hero.title": "Konoba Dva Goluba",
-        "hero.subtitle": "Sapori autentici sul mare a Duboka",
-        "about.title": "Benvenuti alla Konoba Dva Goluba",
-        "about.1": "Situato sulla costa della splendida Duboka, la nostra konoba è il posto perfetto per gli amanti del cibo fatto in casa e dell'atmosfera autentica.",
-        "about.2": "Usiamo solo ingredienti locali e freschi – dal mare direttamente nel piatto. Godetevi specialità di pesce, piatti di carne e pane fatto in casa che cuociamo ogni giorno.",
-        "about.3": "Il nostro obiettivo è semplice: un buon boccone, un bicchiere di vino e il suono del mare.",
-        "about.4": "Venite a trovarci!",
-        "contact.title": "Contatto",
-        "contact.address": "Indirizzo: Duboka bb, Croazia<br>Prenotazioni: +385 91 000 0000<br>Email: info@dvagoluba.hr",
-        "menu.title": "Il nostro menu",
-        "menu.starters": "Antipasti freddi",
-        "menu.salads": "Insalate",
-        "menu.pasta": "Pasta",
-        "menu.risotto": "Risotti",
-        "menu.fish": "Piatti di pesce",
-        "menu.meat": "Piatti di carne",
-        "menu.sides": "Contorni",
-        "galerija-jela": "Galleria Jela"
-      },
-      "cz": {
-        "nav.about": "O nás",
-        "nav.menu": "Jídelní lístek",
-        "nav.gallery": "Galerie",
-        "nav.contact": "Kontakt",
-        "hero.title": "Konoba Dva Goluba",
-        "hero.subtitle": "Autentické chutě u moře v Duboka",
-        "about.title": "Vítejte v Konobě Dva Goluba",
-        "about.1": "Nachází se na pobřeží krásné Duboky, naše konoba je ideálním místem pro milovníky domácí kuchyně a autentické atmosféry.",
-        "about.2": "Používáme pouze místní a čerstvé suroviny – z moře přímo na talíř. Ochutnejte rybí speciality, masové mísy a domácí chléb, který každý den pečeme sami.",
-        "about.3": "Náš cíl je jednoduchý: dobré jídlo, sklenka vína a zvuk moře.",
-        "about.4": "Navštivte nás!",
-        "contact.title": "Kontakt",
-        "contact.address": "Adresa: Duboka bb, Chorvatsko<br>Rezervace: +385 91 000 0000<br>Email: info@dvagoluba.hr",
-        "menu.title": "Nabídka",
-        "menu.starters": "Studené předkrmy",
-        "menu.salads": "Saláty",
-        "menu.pasta": "Těstoviny",
-        "menu.risotto": "Rizota",
-        "menu.fish": "Rybí nabídka",
-        "menu.meat": "Masová jídla",
-        "menu.sides": "Přílohy",
-        "galerija-jela": "Galerie Jela"
-      }
-    };
-
-    function updateLanguage(lang) {
-      // Update all elements with data-i18n attributes
-      document.querySelectorAll("[data-i18n]").forEach(el => {
-        const key = el.getAttribute("data-i18n");
-        if (translations[lang][key]) {
-          el.innerHTML = translations[lang][key];
-        }
-      });
-
-      // Update long text manually if defined
-      const aboutTextContainer = document.querySelector(".about-text");
-      if (aboutTextContainer && lang !== "hr") {
-        aboutTextContainer.querySelector("h2").innerText = translations[lang]["about.title"];
-        aboutTextContainer.querySelectorAll("p")[0].innerText = translations[lang]["about.1"] || "";
-        aboutTextContainer.querySelectorAll("p")[1].innerText = ""; // You can define about.2 etc.
-        aboutTextContainer.querySelectorAll("p")[2].innerText = "";
-        aboutTextContainer.querySelectorAll("p")[3].innerText = "";
-      } else if (lang === "hr") {
-        // Reset to original Croatian content
-        aboutTextContainer.querySelector("h2").innerText = "Dobrodošli u Konobu Dva Goluba";
-        aboutTextContainer.querySelectorAll("p")[0].innerHTML = "<strong>Smješteni uz obalu</strong> prekrasne Duboke, naša konoba je pravo mjesto za sve ljubitelje domaće hrane i autentične atmosfere.";
-        aboutTextContainer.querySelectorAll("p")[1].innerHTML = "Koristimo samo <strong>lokalne i svježe sastojke</strong> – iz mora direktno na tanjur. Uživajte u ribljim specijalitetima, mesnim platama i domaćem kruhu koji svakodnevno pečemo sami.";
-        aboutTextContainer.querySelectorAll("p")[2].innerHTML = "Naš cilj je jednostavan: <em>dobar zalogaj, čaša vina i zvuk mora.</em>";
-        aboutTextContainer.querySelectorAll("p")[3].innerText = "Posjetite nas!";
-      }
+  // Language translations
+  const translations = {
+    "hr": {
+      "nav.about": "O nama",
+      "nav.menu": "Meni",
+      "nav.gallery": "Galerija",
+      "nav.contact": "Kontakt",
+      "hero.title": "Konoba Dva Goluba",
+      "hero.subtitle": "Autentični okusi uz more u Dubokoj",
+      "about.title": "Dobrodošli u Konobu Dva Goluba",
+      "about.1": "Smješteni uz obalu prekrasne Duboke, naša konoba je pravo mjesto za sve ljubitelje domaće hrane i autentične atmosfere.",
+      "about.2": "Koristimo samo lokalne i svježe sastojke – iz mora direktno na tanjur. Uživajte u ribljim specijalitetima, mesnim platama i domaćem kruhu koji svakodnevno pečemo sami.",
+      "about.3": "Naš cilj je jednostavan: dobar zalogaj, čaša vina i zvuk mora.",
+      "about.4": "Posjetite nas!",
+      "contact.title": "Kontakt",
+      "contact.address": "Adresa: Duboka bb, Hrvatska<br>Rezervacije: +385 91 000 0000<br>Email: info@dvagoluba.hr",
+      "menu.title": "Naš meni",
+      "galerija-jela": "Galerija Jela"
+    },
+    "en": {
+      "nav.about": "About Us",
+      "nav.menu": "Menu",
+      "nav.gallery": "Gallery",
+      "nav.contact": "Contact",
+      "hero.title": "Konoba Dva Goluba",
+      "hero.subtitle": "Authentic seaside flavors in Duboka",
+      "about.title": "Welcome to Konoba Dva Goluba",
+      "about.1": "Located on the coast of beautiful Duboka, our tavern is the perfect place for lovers of homemade food and authentic atmosphere.",
+      "about.2": "We use only local and fresh ingredients – from the sea straight to your plate. Enjoy fish specialties, meat platters, and homemade bread we bake daily.",
+      "about.3": "Our goal is simple: a good bite, a glass of wine, and the sound of the sea.",
+      "about.4": "Visit us!",
+      "contact.title": "Contact",
+      "contact.address": "Address: Duboka bb, Croatia<br>Reservations: +385 91 000 0000<br>Email: info@dvagoluba.hr",
+      "menu.title": "Our Menu",
+      "galerija-jela": "Food Gallery"
+    },
+    "de": {
+      "nav.about": "Über uns",
+      "nav.menu": "Menü",
+      "nav.gallery": "Galerie",
+      "nav.contact": "Kontakt",
+      "hero.title": "Konoba Dva Goluba",
+      "hero.subtitle": "Authentische Aromen am Meer in Duboka",
+      "about.title": "Willkommen in der Konoba Dva Goluba",
+      "about.1": "Direkt an der Küste von Duboka gelegen, ist unsere Konoba der perfekte Ort für Liebhaber von hausgemachtem Essen und authentischer Atmosphäre.",
+      "about.2": "Wir verwenden nur lokale und frische Zutaten – direkt aus dem Meer auf Ihren Teller. Genießen Sie Fischspezialitäten, Fleischplatten und hausgemachtes Brot, das wir täglich backen.",
+      "about.3": "Unser Ziel ist einfach: ein guter Bissen, ein Glas Wein und das Rauschen des Meeres.",
+      "about.4": "Besuchen Sie uns!",
+      "contact.title": "Kontakt",
+      "contact.address": "Adresse: Duboka bb, Kroatien<br>Reservierungen: +385 91 000 0000<br>Email: info@dvagoluba.hr",
+      "menu.title": "Unsere Speisekarte",
+      "galerija-jela": "Jela-Galerie"
+    },
+    "it": {
+      "nav.about": "Chi siamo",
+      "nav.menu": "Menu",
+      "nav.gallery": "Galleria",
+      "nav.contact": "Contatto",
+      "hero.title": "Konoba Dva Goluba",
+      "hero.subtitle": "Sapori autentici sul mare a Duboka",
+      "about.title": "Benvenuti alla Konoba Dva Goluba",
+      "about.1": "Situato sulla costa della splendida Duboka, la nostra konoba è il posto perfetto per gli amanti del cibo fatto in casa e dell'atmosfera autentica.",
+      "about.2": "Usiamo solo ingredienti locali e freschi – dal mare direttamente nel piatto. Godetevi specialità di pesce, piatti di carne e pane fatto in casa che cuociamo ogni giorno.",
+      "about.3": "Il nostro obiettivo è semplice: un buon boccone, un bicchiere di vino e il suono del mare.",
+      "about.4": "Venite a trovarci!",
+      "contact.title": "Contatto",
+      "contact.address": "Indirizzo: Duboka bb, Croazia<br>Prenotazioni: +385 91 000 0000<br>Email: info@dvagoluba.hr",
+      "menu.title": "Il nostro menu",
+      "galerija-jela": "Galleria Jela"
+    },
+    "cz": {
+      "nav.about": "O nás",
+      "nav.menu": "Jídelní lístek",
+      "nav.gallery": "Galerie",
+      "nav.contact": "Kontakt",
+      "hero.title": "Konoba Dva Goluba",
+      "hero.subtitle": "Autentické chutě u moře v Duboka",
+      "about.title": "Vítejte v Konobě Dva Goluba",
+      "about.1": "Nachází se na pobřeží krásné Duboky, naše konoba je ideálním místem pro milovníky domácí kuchyně a autentické atmosféry.",
+      "about.2": "Používáme pouze místní a čerstvé suroviny – z moře přímo na talíř. Ochutnejte rybí speciality, masové mísy a domácí chléb, který každý den pečeme sami.",
+      "about.3": "Náš cíl je jednoduchý: dobré jídlo, sklenka vína a zvuk moře.",
+      "about.4": "Navštivte nás!",
+      "contact.title": "Kontakt",
+      "contact.address": "Adresa: Duboka bb, Chorvatsko<br>Rezervace: +385 91 000 0000<br>Email: info@dvagoluba.hr",
+      "menu.title": "Nabídka",
+      "galerija-jela": "Galerie Jela"
     }
+  };
 
-    // Language switcher
-    document.getElementById("languageSwitcher").addEventListener("change", function () {
-      updateLanguage(this.value);
+  // Update language content
+  function updateLanguage(lang) {
+    document.querySelectorAll("[data-i18n]").forEach(el => {
+      const key = el.getAttribute("data-i18n");
+      if (translations[lang] && translations[lang][key]) {
+        el.innerHTML = translations[lang][key];
+      }
     });
-    document.querySelectorAll('.navbar-collapse .nav-link').forEach(link => {
-      link.addEventListener('click', () => {
-        const navbarCollapse = document.querySelector('.navbar-collapse');
-        if (navbarCollapse.classList.contains('show')) {
-          new bootstrap.Collapse(navbarCollapse).toggle();
-        }
-      });
-    });
+  }
 
-    // Initialize default language
-    updateLanguage("hr");
+  // Hero background image rotation
+  function initHeroSlider() {
     const hero = document.getElementById('hero');
+    if (!hero) return;
+
     const images = [
       'assets/lambunderthebell.jpg',
       'assets/ribee.png',
@@ -679,15 +821,64 @@
     }
 
     setInterval(changeBackground, 4000);
+  }
+
+  // Mobile menu functionality
+  function initMobileMenu() {
+    const hamburger = document.getElementById('hamburger');
+    const navLinks = document.getElementById('navLinks');
+    
+    if (!hamburger || !navLinks) return;
+
+    hamburger.addEventListener('click', function() {
+      this.classList.toggle('active');
+      navLinks.classList.toggle('active');
+      document.body.style.overflow = navLinks.classList.contains('active') ? 'hidden' : '';
+    });
+
+    document.querySelectorAll('.nav-links a').forEach(link => {
+      link.addEventListener('click', () => {
+        hamburger.classList.remove('active');
+        navLinks.classList.remove('active');
+        document.body.style.overflow = '';
+      });
+    });
+  }
+
+  // Navbar scroll effect
+  function initNavbarScroll() {
+    const navbar = document.getElementById('mainNav');
+    if (!navbar) return;
+
+    window.addEventListener('scroll', () => {
+      navbar.classList.toggle('scrolled', window.scrollY > 50);
+    });
+  }
+
+  // Language switcher functionality
+  function initLanguageSwitcher() {
+    const languageSwitcher = document.getElementById('languageSwitcher');
+    if (!languageSwitcher) return;
+
+    // Load saved language or default to Croatian
     const savedLang = localStorage.getItem('selectedLang') || 'hr';
-    document.getElementById("languageSwitcher").value = savedLang;
+    languageSwitcher.value = savedLang;
     updateLanguage(savedLang);
 
-    document.getElementById("languageSwitcher").addEventListener("change", function () {
+    languageSwitcher.addEventListener('change', function() {
       const lang = this.value;
       localStorage.setItem('selectedLang', lang);
       updateLanguage(lang);
     });
-  </script>
+  }
+
+  // Initialize all functionality when DOM is loaded
+  document.addEventListener('DOMContentLoaded', function() {
+    initHeroSlider();
+    initMobileMenu();
+    initNavbarScroll();
+    initLanguageSwitcher();
+  });
+</script>
 </body>
 </html>
