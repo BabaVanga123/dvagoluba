@@ -14,8 +14,10 @@
       font-family: 'Playfair Display', serif;
       background-color: #fff8f2;
       color: #222;
-      scroll-behavior: smooth;
+      width: 100%;
+      max-width: 100%;
       overflow-x: hidden;
+      scroll-behavior: smooth;
       
       padding-top: 80px; /* Space for fixed navbar */
     }
@@ -153,9 +155,9 @@
 @media (max-width: 992px) {
   .hamburger {
     display: block;
-    position: relative; /* Changed from default */
-    left: 0; /* Reset the negative left position */
-    margin-right: 45px; /* Add some spacing from the edge */
+    position: relative;
+    left: 0;
+    margin-right: 15px;
   }
   
   .logo img {
@@ -163,29 +165,20 @@
     width: 60px;
   }
   
-  .nav-container {
-    padding: 0 15px; /* Add some padding to prevent edge touching */
+.nav-container {
+    width: 100%;
+    overflow: hidden;
   }
   
+
   .nav-links {
     position: fixed;
     top: 80px;
     left: 0;
-    right: 0; /* Ensure it stretches full width */
-    width: 100%;
-    height: calc(100vh - 80px);
-    background-color: white;
-    flex-direction: column;
-    align-items: center;
-    padding: 2rem 15px; /* Add horizontal padding */
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
-    transform: translateY(-150%);
-    opacity: 0;
-    pointer-events: none;
-    transition: all 0.4s ease;
-    overflow-y: auto;
-    z-index: 999;
-    box-sizing: border-box; /* Ensure padding is included in width */
+    right: 0;
+    width: 100vw; /* Use viewport width */
+    padding: 2rem 15px;
+    box-sizing: border-box;
   }
 
   .nav-links.active {
@@ -221,6 +214,8 @@
   body.menu-open {
     overflow: hidden;
     position: fixed;
+    width: 100%;
+    height: 100%;
   }
 }
     /* Navbar scroll effect */
@@ -844,6 +839,7 @@
 
   // Mobile menu functionality
 // Mobile menu functionality
+// Mobile menu functionality
 function initMobileMenu() {
   const hamburger = document.getElementById('hamburger');
   const navLinks = document.getElementById('navLinks');
@@ -854,6 +850,10 @@ function initMobileMenu() {
     this.classList.toggle('active');
     navLinks.classList.toggle('active');
     document.body.classList.toggle('menu-open');
+    
+    // Force reflow to prevent layout issues
+    document.body.style.overflowX = 'hidden';
+    void document.body.offsetHeight;
   });
 
   document.querySelectorAll('.nav-links a').forEach(link => {
@@ -861,9 +861,27 @@ function initMobileMenu() {
       hamburger.classList.remove('active');
       navLinks.classList.remove('active');
       document.body.classList.remove('menu-open');
+      document.body.style.overflowX = '';
     });
   });
 }
+
+// Add this to handle initial scroll issues
+function preventHorizontalScroll() {
+  document.body.style.overflowX = 'hidden';
+  window.addEventListener('resize', function() {
+    document.body.style.overflowX = 'hidden';
+  });
+}
+
+// Initialize all functionality when DOM is loaded
+document.addEventListener('DOMContentLoaded', function() {
+  preventHorizontalScroll();
+  initHeroSlider();
+  initMobileMenu();
+  initNavbarScroll();
+  initLanguageSwitcher();
+});
 
   // Navbar scroll effect
   function initNavbarScroll() {
