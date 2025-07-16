@@ -14,11 +14,8 @@
       font-family: 'Playfair Display', serif;
       background-color: #fff8f2;
       color: #222;
-      width: 100%;
-      max-width: 100%;
-      overflow-x: hidden;
       scroll-behavior: smooth;
-      
+      overflow-x: hidden;
       padding-top: 80px; /* Space for fixed navbar */
     }
 
@@ -151,34 +148,31 @@
 
     /* Mobile menu styles */
     /* Improved mobile menu styles */
-/* Improved mobile menu styles */
 @media (max-width: 992px) {
   .hamburger {
     display: block;
-    position: relative;
-    left: 0;
-    margin-right: 15px;
   }
-  
-  .logo img {
-    height: 60px;
-    width: 60px;
+  .logo img{
+    height:60px;
+    width:60px;
   }
-  
-.nav-container {
-    width: 100%;
-    overflow: hidden;
-  }
-  
-
   .nav-links {
     position: fixed;
     top: 80px;
     left: 0;
-    right: 0;
-    width: 100vw; /* Use viewport width */
-    padding: 2rem 15px;
-    box-sizing: border-box;
+    width: 100%;
+    height: calc(100vh - 80px);
+    background-color: white;
+    flex-direction: column;
+    align-items: center;
+    padding: 2rem 0;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+    transform: translateY(-150%);
+    opacity: 0;
+    pointer-events: none;
+    transition: all 0.4s ease;
+    overflow-y: auto;
+    z-index: 999;
   }
 
   .nav-links.active {
@@ -193,31 +187,23 @@
     font-size: 1.1rem;
     width: 100%;
     text-align: center;
-    box-sizing: border-box; /* Ensure padding is included in width */
   }
 
   .language-selector {
     margin: 1rem 0 0;
-    width: 100%;
+    width: 80%;
     max-width: 200px;
-    padding: 0 15px; /* Add padding to prevent edge touching */
-    box-sizing: border-box;
-  }
-  
-  /* Prevent horizontal overflow */
-  body {
-    overflow-x: hidden;
-    width: 100%;
   }
   
   /* Prevent scrolling when menu is open */
   body.menu-open {
     overflow: hidden;
+    height: 100%;
     position: fixed;
     width: 100%;
-    height: 100%;
   }
 }
+
     /* Navbar scroll effect */
     nav.scrolled {
       height: 70px;
@@ -540,7 +526,7 @@
 <nav data-aos="fade-down" id="mainNav">
     <div class="nav-container">
       <a href="#" class="logo">
-        <img src="dvagolubakonoba.png" alt=>
+        <img src="assets/dvagolubakonoba.png" alt=>
 
       </a>
       
@@ -838,50 +824,26 @@
   }
 
   // Mobile menu functionality
-// Mobile menu functionality
-// Mobile menu functionality
-function initMobileMenu() {
-  const hamburger = document.getElementById('hamburger');
-  const navLinks = document.getElementById('navLinks');
-  
-  if (!hamburger || !navLinks) return;
-
-  hamburger.addEventListener('click', function() {
-    this.classList.toggle('active');
-    navLinks.classList.toggle('active');
-    document.body.classList.toggle('menu-open');
+  function initMobileMenu() {
+    const hamburger = document.getElementById('hamburger');
+    const navLinks = document.getElementById('navLinks');
     
-    // Force reflow to prevent layout issues
-    document.body.style.overflowX = 'hidden';
-    void document.body.offsetHeight;
-  });
+    if (!hamburger || !navLinks) return;
 
-  document.querySelectorAll('.nav-links a').forEach(link => {
-    link.addEventListener('click', () => {
-      hamburger.classList.remove('active');
-      navLinks.classList.remove('active');
-      document.body.classList.remove('menu-open');
-      document.body.style.overflowX = '';
+    hamburger.addEventListener('click', function() {
+      this.classList.toggle('active');
+      navLinks.classList.toggle('active');
+      document.body.style.overflow = navLinks.classList.contains('active') ? 'hidden' : '';
     });
-  });
-}
 
-// Add this to handle initial scroll issues
-function preventHorizontalScroll() {
-  document.body.style.overflowX = 'hidden';
-  window.addEventListener('resize', function() {
-    document.body.style.overflowX = 'hidden';
-  });
-}
-
-// Initialize all functionality when DOM is loaded
-document.addEventListener('DOMContentLoaded', function() {
-  preventHorizontalScroll();
-  initHeroSlider();
-  initMobileMenu();
-  initNavbarScroll();
-  initLanguageSwitcher();
-});
+    document.querySelectorAll('.nav-links a').forEach(link => {
+      link.addEventListener('click', () => {
+        hamburger.classList.remove('active');
+        navLinks.classList.remove('active');
+        document.body.style.overflow = '';
+      });
+    });
+  }
 
   // Navbar scroll effect
   function initNavbarScroll() {
